@@ -11,7 +11,6 @@ app.onError((err, c) => {
   if (err instanceof HTTPException) {
     return err.getResponse();
   }
-
   return c.json({ error: "Internal error" }, 500);
 });
 
