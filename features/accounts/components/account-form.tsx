@@ -12,7 +12,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 
 const formSchema = insertAccountSchema.pick({
@@ -42,7 +41,7 @@ export const AccountForm = ({
   });
 
   const handleSubmit = (values: FormValues) => {
-    console.log({ values });
+    onSubmit(values);
   };
 
   const handleDelete = () => {
@@ -59,7 +58,7 @@ export const AccountForm = ({
           name="name"
           control={form.control}
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="p-4">
               <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input
@@ -71,6 +70,21 @@ export const AccountForm = ({
             </FormItem>
           )}
         />
+        <Button className="w-full p-4" disabled={disabled}>
+          {id ? "Save Changes" : "Create Account"}
+        </Button>
+        {!!id && (
+          <Button
+            type="button"
+            disabled={disabled}
+            onClick={handleDelete}
+            className="w-full"
+            variant="outline"
+          >
+            <Trash className="size-4 mr-2" />
+            Delete Account
+          </Button>
+        )}
       </form>
     </Form>
   );
